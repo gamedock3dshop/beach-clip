@@ -4,14 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Beach Towel Clip™ - Fini les serviettes qui s'envolent !</title>
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1704598560804932');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1704598560804932&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <style>
         :root {
-            --primary: #ff6b6b; /* Corail estival */
-            --secondary: #4ecdc4; /* Bleu lagon */
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
             --dark: #2d3436;
-            --light: #f7f1e3; /* Sable clair */
+            --light: #f7f1e3;
             --text: #2d3436;
-            --promo: #feca57; /* Soleil d'été */
+            --promo: #feca57;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', 'Segoe UI', sans-serif; }
@@ -24,10 +43,9 @@
             background-attachment: fixed;
             color: var(--text); 
             line-height: 1.6; 
-            padding-bottom: 80px; /* Espace pour le bouton sticky mobile */
+            padding-bottom: 80px; 
         }
 
-        /* Overlay pour lisibilité */
         .bg-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(255, 255, 255, 0.6);
@@ -44,7 +62,6 @@
             overflow: hidden;
         }
         
-        /* HEADER W/ URGENCY */
         header { 
             background: linear-gradient(135deg, var(--secondary), #00b894); 
             text-align: center; 
@@ -86,7 +103,6 @@
         h1 { font-size: 1.8rem; color: var(--dark); margin-bottom: 15px; line-height: 1.3; font-weight: 800; }
         .subtitle { font-size: 1rem; color: #636e72; margin-bottom: 20px; }
         
-        /* Options de Packs */
         .pack-options { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
         .pack-card { 
             border: 2px solid #dfe6e9; 
@@ -141,7 +157,6 @@
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 71, 87, 0.5); }
         
-        /* Sticky Mobile Buy Button */
         .sticky-buy-btn {
             display: none;
             position: fixed;
@@ -167,8 +182,6 @@
             .gallery-grid img { height: 150px; }
             h1 { font-size: 1.5rem; }
             .container { margin: 0; border-radius: 0; }
-            
-            /* Show sticky button on mobile */
             .sticky-buy-btn { display: block; }
             body { padding-bottom: 90px; }
         }
@@ -212,7 +225,6 @@
             <p class="subtitle">⭐️⭐️⭐️⭐️⭐️ 4.9/5 (1,284 Avis Clients)</p>
             
             <div class="pack-options">
-                <!-- OFFRE 1 : 199 DH -->
                 <div class="pack-card" onclick="selectPack('Pack 4 Pièces (199 DH)', '199 DH', this)">
                     <div class="pack-info">
                         <span class="pack-name">☀️ Pack Solo (4 Clips)</span>
@@ -223,7 +235,6 @@
                     </div>
                 </div>
 
-                <!-- OFFRE 2 : 349 DH (PROMO) -->
                 <div class="pack-card active" onclick="selectPack('Pack 8 Pièces (349 DH)', '349 DH', this)">
                     <div class="pack-badge">🎁 OFFRE PRÉFÉRÉE (-49 DH)</div>
                     <div class="pack-info">
@@ -246,10 +257,8 @@
             <div class="order-form">
                 <div class="form-title">🛒 Finaliser la commande</div>
                 
-                <!-- NOUVEAU LIEN GOOGLE APPS SCRIPT ICI -->
                 <form id="cod-form" action="https://script.google.com/macros/s/AKfycbzLzAiY7vFus1PliT4cs89wucrROJJg_0IXgzkbhxnQW-s9CCDPI1rWChruX5T1yww0/exec" method="POST">
                     
-                    <!-- Par défaut, l'offre à 349 DH est sélectionnée -->
                     <input type="hidden" id="selected-pack" name="pack" value="Pack 8 Pièces (349 DH)">
 
                     <div class="form-group">
@@ -284,18 +293,15 @@
     </div>
 </div>
 
-<!-- Sticky Buy Button Mobile -->
 <div class="sticky-buy-btn">
     <button class="submit-btn" onclick="scrollToForm()" style="margin-top: 0; padding: 15px;">J'EN PROFITE MAINTENANT 🚀</button>
 </div>
 
-<!-- WhatsApp Support -->
 <a href="https://wa.me/212664601352?text=Bonjour%20Gamedock%203D,%20je%20suis%20intéressé(e)%20par%20les%20Beach%20Clips!" class="whatsapp-floating" target="_blank">
     <svg viewBox="0 0 32 32" class="whatsapp-icon"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.483 2.017 7.797l-2.017 7.362 7.544-1.979c2.247 1.213 4.821 1.905 7.556 1.905 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.25c-2.436 0-4.712-0.659-6.671-1.803l-0.479-0.279-4.468 1.171 1.192-4.352-0.307-0.488c-1.221-1.947-1.936-4.256-1.936-6.732 0-7.307 5.943-13.25 13.25-13.25s13.25 5.943 13.25 13.25-5.943 13.25-13.25 13.25zM22.379 19.364c-0.349-0.175-2.067-1.020-2.386-1.136-0.319-0.116-0.552-0.175-0.785 0.175s-0.899 1.136-1.103 1.369c-0.204 0.233-0.407 0.262-0.756 0.087-1.346-0.672-2.316-1.176-3.266-2.808-0.243-0.417 0.243-0.388 0.697-1.291 0.078-0.155 0.039-0.291-0.019-0.408s-0.552-1.33-0.756-1.825c-0.199-0.481-0.403-0.413-0.552-0.422-0.141-0.005-0.306-0.005-0.471-0.005-0.165 0-0.432 0.063-0.659 0.311s-0.874 0.854-0.874 2.078 0.893 2.408 0.99 2.544c0.097 0.136 1.757 2.684 4.257 3.767 0.595 0.257 1.058 0.413 1.422 0.529 0.597 0.19 1.141 0.165 1.573 0.102 0.476-0.068 1.461-0.597 1.665-1.175 0.204-0.578 0.204-1.073 0.141-1.175-0.063-0.102-0.233-0.16-0.578-0.335z"/></svg>
 </a>
 
 <script>
-    // Choix du pack
     function selectPack(packValue, priceText, element) {
         document.querySelectorAll('.pack-card').forEach(card => card.classList.remove('active'));
         element.classList.add('active');
@@ -303,12 +309,10 @@
         document.getElementById('btn-price').innerText = priceText;
     }
 
-    // Bouton sticky mobile : faire défiler vers le formulaire
     function scrollToForm() {
         document.getElementById('commande-section').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Gestion de l'envoi du formulaire (Google Sheet + Telegram)
     document.getElementById('cod-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const button = document.getElementById('submit-btn');
@@ -325,7 +329,6 @@
             window.location.href = "thankyou.html";
         })
         .catch(() => {
-            // Sécurité : même si le navigateur bloque la réponse visuelle, on redirige vers merci.
             window.location.href = "thankyou.html";
         });
     });
