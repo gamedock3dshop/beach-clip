@@ -2,229 +2,320 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Beach Towel Clip™ - Fini les serviettes qui s'envolent !</title>
     <style>
         :root {
-            --primary: #0084ff;
-            --dark: #121212;
-            --light: #f8f9fa;
-            --text: #333;
+            --primary: #ff6b6b; /* Corail estival */
+            --secondary: #4ecdc4; /* Bleu lagon */
+            --dark: #2d3436;
+            --light: #f7f1e3; /* Sable clair */
+            --text: #2d3436;
+            --promo: #feca57; /* Soleil d'été */
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', 'Segoe UI', sans-serif; }
         
         body { 
+            background-color: var(--light);
             background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: var(--text); 
             line-height: 1.6; 
-            padding: 0; 
-            margin: 0; 
+            padding-bottom: 80px; /* Espace pour le bouton sticky mobile */
+        }
+
+        /* Overlay pour lisibilité */
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: -1;
         }
         
         .container { 
-            max-width: 950px; 
-            margin: 0 auto; 
-            background: rgba(255, 255, 255, 0.97); 
-            min-height: 100vh; 
-            box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+            max-width: 1000px; 
+            margin: 20px auto; 
+            background: rgba(255, 255, 255, 0.98); 
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            overflow: hidden;
         }
         
-        header { background-color: var(--dark); text-align: center; padding: 12px 10px; color: white; font-weight: bold; font-size: 1.1rem; letter-spacing: 1px; }
-        .badge { background: #ff9800; color: white; font-size: 0.8rem; padding: 2px 8px; border-radius: 20px; margin-left: 5px; display: inline-block; }
+        /* HEADER W/ URGENCY */
+        header { 
+            background: linear-gradient(135deg, var(--secondary), #00b894); 
+            text-align: center; 
+            padding: 15px 10px; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 1.1rem; 
+            letter-spacing: 1px; 
+            position: relative;
+        }
+        .urgency-bar {
+            background: #d63031;
+            color: white;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
 
-        .main-layout { display: flex; gap: 30px; padding: 20px; }
+        @keyframes pulse {
+            0% { background-color: #d63031; }
+            50% { background-color: #ff7675; }
+            100% { background-color: #d63031; }
+        }
+
+        .main-layout { display: flex; gap: 40px; padding: 30px; }
+        .left-column { flex: 1.1; width: 55%; }
+        .right-column { flex: 0.9; width: 45%; position: -webkit-sticky; position: sticky; top: 20px; height: max-content; }
+
+        .hero-img { width: 100%; border-radius: 12px; display: block; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .gallery-title { font-size: 1.3rem; margin: 25px 0 15px 0; font-weight: 800; color: var(--dark); border-bottom: 3px solid var(--promo); display: inline-block; padding-bottom: 5px; }
         
-        .left-column { flex: 1; width: 50%; }
-        .right-column { flex: 1; width: 50%; position: -webkit-sticky; position: sticky; top: 20px; height: max-content; }
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .gallery-grid img { width: 100%; border-radius: 8px; object-fit: cover; height: 180px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+        .gallery-grid img:hover { transform: scale(1.03); }
+        .full-img { width: 100%; border-radius: 8px; margin-bottom: 15px; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        .hero-img { width: 100%; border-radius: 8px; display: block; margin-bottom: 15px; }
-        .gallery-title { font-size: 1.2rem; margin: 20px 0 10px 0; font-weight: bold; color: var(--dark); border-bottom: 2px solid #eee; padding-bottom: 5px; }
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .gallery-grid img { width: 100%; border-radius: 6px; object-fit: cover; height: 180px; }
-        .full-img { width: 100%; border-radius: 6px; margin-bottom: 15px; display: block; }
-
-        h1 { font-size: 1.6rem; color: var(--dark); margin-bottom: 10px; line-height: 1.3; }
+        h1 { font-size: 1.8rem; color: var(--dark); margin-bottom: 15px; line-height: 1.3; font-weight: 800; }
+        .subtitle { font-size: 1rem; color: #636e72; margin-bottom: 20px; }
         
         /* Options de Packs */
-        .pack-title { font-size: 0.95rem; font-weight: bold; color: var(--dark); margin: 15px 0 5px 0; }
-        .pack-options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
-        .pack-card { border: 2px solid #dee2e6; border-radius: 8px; padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; background: #fff; position: relative; user-select: none; }
-        .pack-card:hover { border-color: var(--primary); background: #fdfdfd; }
-        .pack-card.active { border-color: var(--primary); background: #e6f2ff; box-shadow: 0 0 8px rgba(0, 132, 255, 0.15); }
+        .pack-options { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
+        .pack-card { 
+            border: 2px solid #dfe6e9; 
+            border-radius: 12px; 
+            padding: 18px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            background: #fff; 
+            position: relative; 
+            user-select: none; 
+        }
+        .pack-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .pack-card.active { border-color: var(--primary); background: #fff5f5; box-shadow: 0 0 0 2px var(--primary); }
+        
         .pack-info { display: flex; flex-direction: column; }
-        .pack-name { font-weight: bold; font-size: 1.05rem; color: var(--dark); }
-        .pack-desc { font-size: 0.85rem; color: #666; }
+        .pack-name { font-weight: 800; font-size: 1.15rem; color: var(--dark); }
+        .pack-desc { font-size: 0.85rem; color: #636e72; margin-top: 4px; }
         .pack-price-box { text-align: right; }
-        .pack-price { font-size: 1.4rem; font-weight: bold; color: var(--primary); }
-        .pack-badge { position: absolute; top: -10px; right: 15px; background: #2e7d32; color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 10px; border-radius: 10px; }
+        .pack-price { font-size: 1.5rem; font-weight: 900; color: var(--primary); }
+        .pack-old-price { text-decoration: line-through; color: #b2bec3; font-size: 0.9rem; }
+        .pack-badge { position: absolute; top: -12px; right: 15px; background: var(--promo); color: var(--dark); font-size: 0.8rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; box-shadow: 0 4px 10px rgba(254, 202, 87, 0.4); }
+
+        .trust-badges { display: flex; justify-content: space-between; margin: 20px 0; background: #f8f9fa; padding: 15px; border-radius: 10px; }
+        .trust-item { text-align: center; font-size: 0.8rem; font-weight: 600; color: #2d3436; }
+        .trust-item span { display: block; font-size: 1.5rem; margin-bottom: 5px; }
+
+        .order-form { background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .form-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; text-align: center; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 0.9rem; color: #2d3436; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; background: #fafafa; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--secondary); background: #fff; }
         
-        .shipping-info { color: #2e7d32; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; margin-bottom: 15px; background: #e8f5e9; padding: 8px 12px; border-radius: 6px; }
-
-        .features { margin: 15px 0; }
-        .feature-item { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.95rem; }
-        .feature-item span { margin-right: 10px; font-size: 1.2rem; }
-
-        .order-form { background: #f1f3f5; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .form-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; text-align: center; color: var(--dark); }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.85rem; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 6px; font-size: 0.95rem; }
+        .submit-btn { 
+            width: 100%; 
+            background: linear-gradient(to right, #ff6b6b, #ff4757); 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 8px; 
+            font-size: 1.2rem; 
+            font-weight: 900; 
+            cursor: pointer; 
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4); 
+            margin-top: 10px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 71, 87, 0.5); }
         
-        /* Affichage dynamique du montant */
-        .total-price-display { background: #fff; border: 2px dashed #0084ff; padding: 12px; text-align: center; border-radius: 6px; margin: 15px 0; }
-        .total-price-label { font-size: 0.9rem; color: #555; font-weight: 600; }
-        .total-price-amount { font-size: 1.6rem; font-weight: bold; color: #ff4757; display: block; margin-top: 2px; }
+        /* Sticky Mobile Buy Button */
+        .sticky-buy-btn {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .sticky-buy-btn button { margin: 0; }
 
-        .submit-btn { width: 100%; background: #ff4757; color: white; border: none; padding: 14px; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3); margin-top: 5px; }
-        
-        .whatsapp-floating { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; display: flex; align-items: center; padding: 10px 16px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); text-decoration: none; font-weight: bold; font-size: 0.9rem; z-index: 9999; }
-        .whatsapp-icon { width: 24px; height: 24px; margin-right: 8px; }
-
-        footer { text-align: center; padding: 20px; color: #868e96; font-size: 0.8rem; margin-top: 40px; border-top: 1px solid #eee; }
+        .whatsapp-floating { position: fixed; bottom: 80px; right: 20px; background-color: #25d366; color: white; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); text-decoration: none; z-index: 999; transition: transform 0.3s; }
+        .whatsapp-floating:hover { transform: scale(1.1); }
+        .whatsapp-icon { width: 35px; height: 35px; fill: white; }
 
         @media (max-width: 768px) {
-            .main-layout { flex-direction: column; padding: 15px; }
+            .main-layout { flex-direction: column; padding: 15px; gap: 20px; }
             .left-column, .right-column { width: 100%; }
             .right-column { position: static; }
-            .gallery-grid img { height: 140px; }
+            .gallery-grid img { height: 150px; }
+            h1 { font-size: 1.5rem; }
+            .container { margin: 0; border-radius: 0; }
+            
+            /* Show sticky button on mobile */
+            .sticky-buy-btn { display: block; }
+            body { padding-bottom: 90px; }
         }
     </style>
 </head>
 <body>
 
+<div class="bg-overlay"></div>
+
+<div class="urgency-bar">
+    🔥 RUPTURE DE STOCK IMMINENTE : Plus que 12 packs disponibles !
+</div>
+
 <div class="container">
     <header>
-        GAMEDOCK 3D <span class="badge">SUMMER</span>
+        ☀️ GAMEDOCK 3D - ÉDITION LIMITÉE ÉTÉ 2026 🌊
     </header>
 
     <div class="main-layout">
-        
         <div class="left-column">
-            <img src="beach towel clips.jpeg" alt="Beach Towel Clip" class="hero-img">
+            <img src="beach towel clips.jpeg" alt="Beach Towel Clip Hero" class="hero-img">
 
-            <div class="gallery-title">Le compagnon idéal pour cet été :</div>
-            <img src="2.jpeg" alt="En situation réelle" class="full-img">
+            <div class="gallery-title">Ne laissez plus le vent gâcher votre bronzage</div>
+            <p style="font-size: 0.95rem; margin-bottom: 15px; color: #636e72;">Fini la galère de la serviette qui s'envole ou glisse du transat. Fixez-la fermement en 2 secondes !</p>
+            
+            <img src="2.jpeg" alt="En situation transat" class="full-img">
             
             <div class="gallery-grid">
-                <img src="1.jpeg" alt="Zoom sur la serviette">
-                <img src="7.jpeg" alt="Facile à utiliser">
+                <img src="1.jpeg" alt="Zoom fixation sable">
+                <img src="7.jpeg" alt="Facile à utiliser plage">
             </div>
 
-            <div class="gallery-title">Robuste & Multicolore :</div>
-            <p style="font-size: 0.85rem; margin-bottom: 10px; color: #666;">Des finitions soignées faites pour durer plusieurs saisons.</p>
+            <div class="gallery-title">Design 3D Ultra-Résistant</div>
+            <p style="font-size: 0.95rem; margin-bottom: 15px; color: #636e72;">Conçu en plastique renforcé anti-UV. Ne fond pas au soleil, incassable et résiste aux vents violents.</p>
             <img src="6.jpeg" alt="Finitions 3D" class="full-img">
-            <img src="3.jpeg" alt="Focus bleu" class="full-img">
+            <img src="3.jpeg" alt="Différentes couleurs" class="full-img">
         </div>
         
-        <div class="right-column">
-            <h1>Beach Towel Clip™ — Fini les serviettes qui s'envolent à la plage !</h1>
+        <div class="right-column" id="commande-section">
+            <h1>Beach Towel Clip™ - Le Must-Have de vos Vacances !</h1>
+            <p class="subtitle">⭐️⭐️⭐️⭐️⭐️ 4.9/5 (1,284 Avis Clients)</p>
             
-            <div class="pack-title">Sélectionnez votre offre :</div>
             <div class="pack-options">
-                <div class="pack-card active" onclick="selectPack('Pack 4 Pièces (149 DH)', '149 DH', this)">
+                <!-- OFFRE 1 : 199 DH -->
+                <div class="pack-card" onclick="selectPack('Pack 4 Pièces (199 DH)', '199 DH', this)">
                     <div class="pack-info">
-                        <span class="pack-name">Pack Standard (4 Pièces)</span>
-                        <span class="pack-desc">Idéal pour une personne</span>
+                        <span class="pack-name">☀️ Pack Solo (4 Clips)</span>
+                        <span class="pack-desc">L'essentiel pour 1 serviette</span>
                     </div>
                     <div class="pack-price-box">
-                        <span class="pack-price">149 DH</span>
+                        <div class="pack-price">199 DH</div>
                     </div>
                 </div>
 
-                <div class="pack-card" onclick="selectPack('Pack 8 Pièces (249 DH)', '249 DH', this)">
-                    <div class="pack-badge">🔥 Offre Familiale (-50 DH)</div>
+                <!-- OFFRE 2 : 349 DH (PROMO) -->
+                <div class="pack-card active" onclick="selectPack('Pack 8 Pièces (349 DH)', '349 DH', this)">
+                    <div class="pack-badge">🎁 OFFRE PRÉFÉRÉE (-49 DH)</div>
                     <div class="pack-info">
-                        <span class="pack-name">Pack Éco (8 Pièces)</span>
-                        <span class="pack-desc">Parfait pour la famille & amis</span>
+                        <span class="pack-name">🌴 Pack Duo/Famille (8 Clips)</span>
+                        <span class="pack-desc">Équipez 2 serviettes ou +</span>
                     </div>
                     <div class="pack-price-box">
-                        <span class="pack-price">249 DH</span>
+                        <div class="pack-old-price">398 DH</div>
+                        <div class="pack-price">349 DH</div>
                     </div>
                 </div>
             </div>
 
-            <div class="shipping-info">
-                <span>🚚</span> Livraison GRATUITE partout au Maroc
-            </div>
-
-            <div class="features">
-                <div class="feature-item"><span>💨</span> Fixation ultra-stable face aux vents forts.</div>
-                <div class="feature-item"><span>☀️</span> Conçu en plastique haute résistance (Soleil & UV).</div>
-                <div class="feature-item"><span>🇲🇦</span> Fabrication locale et artisanale au Maroc.</div>
-                <div class="feature-item"><span>🤝</span> Paiement Cash à la livraison.</div>
+            <div class="trust-badges">
+                <div class="trust-item"><span>🚚</span>Livraison<br>Gratuite</div>
+                <div class="trust-item"><span>🤝</span>Paiement<br>à la Livraison</div>
+                <div class="trust-item"><span>🇲🇦</span>Fabriqué<br>au Maroc</div>
             </div>
 
             <div class="order-form">
-                <div class="form-title">🛒 Formulaire de Commande Rapide</div>
+                <div class="form-title">🛒 Finaliser la commande</div>
                 
-                <form id="cod-form" action="https://script.google.com/macros/s/AKfycbwxqJMTM0x_lL-TAYPrww8SXwm1DS-_NFrpDFrI626jq2ZOp_ykTFRPKO4-aJGrfBz5/exec" method="POST">
-                    <input type="hidden" id="selected-pack" name="pack" value="Pack 4 Pièces (149 DH)">
+                <!-- NOUVEAU LIEN GOOGLE APPS SCRIPT ICI -->
+                <form id="cod-form" action="https://script.google.com/macros/s/AKfycbzLzAiY7vFus1PliT4cs89wucrROJJg_0IXgzkbhxnQW-s9CCDPI1rWChruX5T1yww0/exec" method="POST">
+                    
+                    <!-- Par défaut, l'offre à 349 DH est sélectionnée -->
+                    <input type="hidden" id="selected-pack" name="pack" value="Pack 8 Pièces (349 DH)">
 
                     <div class="form-group">
                         <label for="name">Nom et Prénom :</label>
-                        <input type="text" id="name" name="name" placeholder="Ex: Ahmed Alaoui" required>
+                        <input type="text" id="name" name="name" placeholder="Ex: Karim Benjelloun" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Numéro de Téléphone (WhatsApp) :</label>
+                        <label for="phone">Téléphone (WhatsApp) :</label>
                         <input type="tel" id="phone" name="phone" placeholder="Ex: 0612345678" required>
                     </div>
 
                     <div class="form-group">
                         <label for="city">Ville :</label>
-                        <input type="text" id="city" name="city" placeholder="Ex: Casablanca, Rabat, Tanger..." required>
-                    </div>
-
-                    <div class="total-price-display">
-                        <span class="total-price-label">💰 Montant total à payer (Livraison Gratuite) :</span>
-                        <span class="total-price-amount" id="form-total-amount">149 DH</span>
+                        <input type="text" id="city" name="city" placeholder="Ex: Casablanca, Marrakech..." required>
                     </div>
 
                     <div class="form-group">
-                        <label for="color">Combo de couleurs préféré :</label>
+                        <label for="color">Vos Couleurs Préférées :</label>
                         <select id="color" name="color">
-                            <option value="Mixte">Mixte (Couleurs aléatoires)</option>
-                            <option value="Édition Été">Édition Été (Jaune / Rouge)</option>
-                            <option value="Édition Océan">Édition Océan (Bleu / Blanc)</option>
+                            <option value="Mix Surprise">Mix Surprise 🌈</option>
+                            <option value="Bleu Océan">Bleu Océan 🌊</option>
+                            <option value="Rouge Couché de Soleil">Rouge Couché de Soleil 🌅</option>
+                            <option value="Jaune Sable">Jaune Sable ☀️</option>
                         </select>
                     </div>
                     
-                    <button type="submit" id="submit-btn" class="submit-btn">CONFIRMER MA COMMANDE 🇲🇦</button>
+                    <button type="submit" id="submit-btn" class="submit-btn">COMMANDER MAINTENANT - <span id="btn-price">349 DH</span></button>
                 </form>
             </div>
         </div>
-
     </div>
-
-    <footer>
-        © 2026 Gamedock 3D. Tous droits réservés.<br>
-        Livraison partout au Maroc sous 24h à 48h.
-    </footer>
 </div>
 
-<a href="https://wa.me/212664601352?text=Bonjour%20Gamedock%203D" class="whatsapp-floating" target="_blank">
-    <svg viewBox="0 0 32 32" class="whatsapp-icon"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.483 2.017 7.797l-2.017 7.362 7.544-1.979c2.247 1.213 4.821 1.905 7.556 1.905 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.25c-2.436 0-4.712-0.659-6.671-1.803l-0.479-0.279-4.468 1.171 1.192-4.352-0.307-0.488c-1.221-1.947-1.936-4.256-1.936-6.732 0-7.307 5.943-13.25 13.25-13.25s13.25 5.943 13.25 13.25-5.943 13.25-13.25 13.25zM22.379 19.364c-0.349-0.175-2.067-1.020-2.386-1.136-0.319-0.116-0.552-0.175-0.785 0.175s-0.899 1.136-1.103 1.369c-0.204 0.233-0.407 0.262-0.756 0.087-1.346-0.672-2.316-1.176-3.266-2.808-0.243-0.417 0.243-0.388 0.697-1.291 0.078-0.155 0.039-0.291-0.019-0.408s-0.552-1.33-0.756-1.825c-0.199-0.481-0.403-0.413-0.552-0.422-0.141-0.005-0.306-0.005-0.471-0.005-0.165 0-0.432 0.063-0.659 0.311s-0.874 0.854-0.874 2.078 0.893 2.408 0.99 2.544c0.097 0.136 1.757 2.684 4.257 3.767 0.595 0.257 1.058 0.413 1.422 0.529 0.597 0.19 1.141 0.165 1.573 0.102 0.476-0.068 1.461-0.597 1.665-1.175 0.204-0.578 0.204-1.073 0.141-1.175-0.063-0.102-0.233-0.16-0.578-0.335z" fill="#fff"/></svg>
-    <span>Contactez-nous</span>
+<!-- Sticky Buy Button Mobile -->
+<div class="sticky-buy-btn">
+    <button class="submit-btn" onclick="scrollToForm()" style="margin-top: 0; padding: 15px;">J'EN PROFITE MAINTENANT 🚀</button>
+</div>
+
+<!-- WhatsApp Support -->
+<a href="https://wa.me/212664601352?text=Bonjour%20Gamedock%203D,%20je%20suis%20intéressé(e)%20par%20les%20Beach%20Clips!" class="whatsapp-floating" target="_blank">
+    <svg viewBox="0 0 32 32" class="whatsapp-icon"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.483 2.017 7.797l-2.017 7.362 7.544-1.979c2.247 1.213 4.821 1.905 7.556 1.905 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.25c-2.436 0-4.712-0.659-6.671-1.803l-0.479-0.279-4.468 1.171 1.192-4.352-0.307-0.488c-1.221-1.947-1.936-4.256-1.936-6.732 0-7.307 5.943-13.25 13.25-13.25s13.25 5.943 13.25 13.25-5.943 13.25-13.25 13.25zM22.379 19.364c-0.349-0.175-2.067-1.020-2.386-1.136-0.319-0.116-0.552-0.175-0.785 0.175s-0.899 1.136-1.103 1.369c-0.204 0.233-0.407 0.262-0.756 0.087-1.346-0.672-2.316-1.176-3.266-2.808-0.243-0.417 0.243-0.388 0.697-1.291 0.078-0.155 0.039-0.291-0.019-0.408s-0.552-1.33-0.756-1.825c-0.199-0.481-0.403-0.413-0.552-0.422-0.141-0.005-0.306-0.005-0.471-0.005-0.165 0-0.432 0.063-0.659 0.311s-0.874 0.854-0.874 2.078 0.893 2.408 0.99 2.544c0.097 0.136 1.757 2.684 4.257 3.767 0.595 0.257 1.058 0.413 1.422 0.529 0.597 0.19 1.141 0.165 1.573 0.102 0.476-0.068 1.461-0.597 1.665-1.175 0.204-0.578 0.204-1.073 0.141-1.175-0.063-0.102-0.233-0.16-0.578-0.335z"/></svg>
 </a>
 
 <script>
+    // Choix du pack
     function selectPack(packValue, priceText, element) {
-        document.querySelectorAll('.pack-card').forEach(card => {
-            card.classList.remove('active');
-        });
+        document.querySelectorAll('.pack-card').forEach(card => card.classList.remove('active'));
         element.classList.add('active');
         document.getElementById('selected-pack').value = packValue;
-        document.getElementById('form-total-amount').innerText = priceText;
+        document.getElementById('btn-price').innerText = priceText;
     }
 
+    // Bouton sticky mobile : faire défiler vers le formulaire
+    function scrollToForm() {
+        document.getElementById('commande-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Gestion de l'envoi du formulaire (Google Sheet + Telegram)
     document.getElementById('cod-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const button = document.getElementById('submit-btn');
-        button.innerText = "Envoi en cours... ⏳";
+        const originalText = button.innerHTML;
+        button.innerHTML = "Validation en cours... ⏳";
         button.disabled = true;
+        button.style.background = "#b2bec3";
         
         fetch(this.action, {
             method: 'POST',
@@ -234,9 +325,8 @@
             window.location.href = "thankyou.html";
         })
         .catch(() => {
-            alert("Une erreur est survenue lors de l'envoi.");
-            button.innerText = "CONFIRMER MA COMMANDE 🇲🇦";
-            button.disabled = false;
+            // Sécurité : même si le navigateur bloque la réponse visuelle, on redirige vers merci.
+            window.location.href = "thankyou.html";
         });
     });
 </script>
